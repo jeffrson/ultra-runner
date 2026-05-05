@@ -158,6 +158,7 @@ export class OutputSpinner {
   _stop() {
     if (this.running) {
       if (this.interval) clearInterval(this.interval)
+      this.terminal.reset()
       this.render(true)
       this.interval = undefined
       this.running = false
