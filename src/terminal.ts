@@ -72,10 +72,17 @@ export class Terminal {
     return left > 0 || right > 0
       ? {
           left: leftWidth,
-          str: to.slice(left),
-          // FIX: str: to.slice(left, -right + 1),
+          str: from.slice(left),
         }
       : undefined
+  }
+
+  reset() {
+    if (!this.lines.length) return
+    readline.moveCursor(this.stream, 0, -(this.lines.length - 1))
+    readline.cursorTo(this.stream, 0)
+    readline.clearScreenDown(this.stream)
+    this.lines = []
   }
 
   update(text: string | string[]) {
